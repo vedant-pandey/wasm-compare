@@ -14,7 +14,7 @@
 	function addTodo() {
 		lastId++;
 		todoList.push({ title: addTodoValue, id: lastId });
-		todoList = todoList
+		todoList = todoList;
 		addTodoValue = '';
 	}
 
@@ -25,7 +25,7 @@
 	}
 </script>
 
-<div class="bg-black text-white h-screen w-screen p-20">
+<div class="bg-black text-white h-screen w-screen p-20 overflow-auto">
 	<h1 class="text-5xl">Svelte Todo</h1>
 
 	<div class="flex border h-20 justify-around items-center p-5 m-5 bg-slate-50 rounded-lg">
@@ -35,9 +35,11 @@
 		/>
 		<button
 			on:click={addTodo}
-			class={`${false ? 'bg-yellow-500' : 'bg-green-500'} h-full w-40 mx-5 rounded-full`}
-			>Add Todo</button
+			class={`${!addTodoValue ? 'bg-yellow-500' : 'bg-green-500'} h-full w-40 mx-5 rounded-full`}
+			disabled={!addTodoValue}
 		>
+			{!addTodoValue ? 'Add a title' : 'Add Todo'}
+		</button>
 	</div>
 	<div class="bg-slate-500 p-5 mt-10">
 		{#each todoList as { title, id } (id)}
