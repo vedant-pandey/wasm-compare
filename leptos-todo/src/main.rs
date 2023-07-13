@@ -1,5 +1,5 @@
 use leptos::{
-    component, create_signal, ev::MouseEvent, event_target_value, view, For, IntoView, Scope,
+    component, create_signal, event_target_value, view, For, IntoView, Scope,
     SignalUpdate,
 };
 
