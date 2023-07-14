@@ -12,7 +12,7 @@ fn main() {
 }
 
 fn App(cx: Scope) -> Element {
-    let todo_title = use_state(cx, || "Todo title".to_string());
+    let todo_title = use_state(cx, || String::from(""));
     let todo_list = vec![
         TodoItem {
             id: 1,
@@ -28,7 +28,7 @@ fn App(cx: Scope) -> Element {
         },
     ];
     let todos = use_ref(cx, || todo_list);
-    let mut last_todo_id = use_state(cx, || todos.read().len() as u32);
+    let last_todo_id = use_state(cx, || todos.read().len() as u32);
     cx.render(rsx! {
         link { rel: "stylesheet", href: "output.css" },
         div {
@@ -48,7 +48,8 @@ fn App(cx: Scope) -> Element {
                 },
                 button {
                     onclick: move |_| {
-                        last_todo_id += 1;
+                        // last_todo_id += 1;
+                        last_todo_id.set(last_todo_id.get().clone() + 1);
                         todos.write().push(TodoItem { id: *last_todo_id.get(), title: todo_title.get().clone() });
                         todo_title.set("".to_string());
                     },
